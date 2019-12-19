@@ -1,5 +1,5 @@
-= Uno chingon (Tu título) Docs
-Subtitulo bien chingon
+= Título Docs
+Subtítulo
 {buildDate}
 :toclevels: 4
 :toc-title: Índice
