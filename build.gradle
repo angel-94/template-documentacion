@@ -8,6 +8,7 @@ buildscript {
 
 plugins {
   id 'org.asciidoctor.convert' version '1.5.3'
+  id 'com.gradle.plugin-publish' version '0.9.10' apply false
 }
 
 apply plugin: 'java'
@@ -44,14 +45,33 @@ asciidoctor {
     'allow-uri-read': true
 }
 
-githubPages {
-	repoUri = 'https://github.com/angel-94/template-documentacion.git' 
-	credentials { 
-		username = project.hasProperty('githubToken') ? project.githubToken : ''
-		password = ''
-	}
+ext {
+    currentBranch = System.getenv('ANGEL_BRANCH') ?: 'not-on-angel-ci'
+    pushDocs = currentBranch.matches(~/^master|development-.+|maintenance-.+$/)
+}
 
-	pages {
-		from 'build/asciidoc/html5'
-	}
+gitPublish {
+    repoUri = gitHubRepoUri
+    branch = pagesBranch
+
+    contents {
+        into currentBranch
+        from rootProject.tasks.combineDocs
+    }
+
+    preserve {
+        include '**'
+        exclude "${currentBranch}/**"
+    }
+
+    commitMessage = "Updating SNAPSHOT documentation for ${currentBranch} at ${version}"
+}
+
+task publishDocs {
+    if(pushDocs) {
+        dependsOn gitPublishPush
+    }
+    doFirst {
+        logger.info "${currentBranch} is ${pushDocs ? 'a match. Push attempted' : 'not a match. Push skipped.'}"
+    }
 }
