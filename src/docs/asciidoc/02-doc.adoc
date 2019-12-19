@@ -1,0 +1,9 @@
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
+
+
+=== Vamos a darle con todo
+
+- Chinguen a toda su...
+

@@ -1,0 +1,10 @@
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
+
+== Una intro
+
+=== El intro del intro
+
+Documentación del proyecto camer
+
