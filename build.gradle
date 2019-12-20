@@ -58,15 +58,15 @@ asciidoctor {
 
 
 gitPublish {
-  printf("*** Publish ...")
+  println("*** Publish from -> $asciidocBuildDir")
   repoUri = gitHubRepoUri 
   branch = pagesBranch
 
-  repoDir = file("$asciidocBuildDir")
+
+  repoDir = file("$buildDir/docs")
 
   contents {
     from "$asciidocBuildDir"
-    from "$projectDir/src/docs/asciidoc"
     into "."
   }
 
@@ -74,5 +74,5 @@ gitPublish {
 }
 
 gitPublishPush.dependsOn asciidoctor
-// gitPublishPush.shouldRunAfter clean, asciidoctor, build
+gitPublishPush.shouldRunAfter clean, asciidoctor, build
 
