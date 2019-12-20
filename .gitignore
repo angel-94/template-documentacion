@@ -7,3 +7,6 @@
 *.iws
 .gradletasknamecache
 build/
+
+.idea/
+.vscode/
