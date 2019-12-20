@@ -1,0 +1,20 @@
+= Título Docs
+Subtítulo
+{buildDate}
+:toclevels: 4
+:toc-title: Índice
+:revnumber: {project-version}
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
+:title-logo-image: image:logo.png[]
+
+<<<
+include::01-intro.adoc[]
+<<<
+include::02-doc.adoc[]
+<<<
+include::03-other.adoc[]
+<<<
+include::04-the-end.adoc[]
+
