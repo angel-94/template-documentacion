@@ -1,4 +1,4 @@
-## Ejemplo de documentación
+## Ejemplo de documentación con AsciiDoc
 
 - Documentación con ASCIIDOCTOR
 
