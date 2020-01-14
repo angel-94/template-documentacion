@@ -24,5 +24,5 @@ GRGIT_PASS=myauthtoken
 
 - Posteriormente ejecutar la siguiente tarea para la publicación de nuestra documentación
 ```
-gradle gitPublishPush
+./gradlew gitPublishPush
 ```
