@@ -10,11 +10,11 @@ ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
 :title-logo-image: image:logo.png[]
 
 <<<
-include::01-intro.adoc[]
+include::01-seccion-00.adoc[]
 <<<
-include::02-doc.adoc[]
+include::02-seccion-01.adoc[]
 <<<
-include::03-other.adoc[]
+include::03-seccion-02.adoc[]
 <<<
-include::04-the-end.adoc[]
+include::04-seccion-03.adoc[]
 
