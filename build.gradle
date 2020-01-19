@@ -34,6 +34,7 @@ asciidoctorj {
 }
 
 asciidoctor {
+  // backends 'dzslides'//'html5', 'pdf' //, 'epub3', 'docbook'
   backends 'html5', 'pdf' //, 'epub3', 'docbook'
   // enable the Asciidoctor Diagram extension
   requires 'asciidoctor-diagram'
