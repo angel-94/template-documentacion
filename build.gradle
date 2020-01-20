@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 buildscript {
     ext {
         asciidocBuildDir = "$buildDir/asciidoc"
@@ -46,7 +48,7 @@ asciidoctor {
             'endpoint-url': 'http://example.org',
             'source-highlighter': 'coderay',
             'outdir': outputDir.absolutePath,
-            'buildDate': new java.text.SimpleDateFormat("dd-MMM-yyyy").format(new Date()),
+            'buildDate': new SimpleDateFormat("dd-MMM-yyyy").format(new Date()),
             'toc': 'left',
             'icons': 'font',
             'setanchors': '',
