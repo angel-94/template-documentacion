@@ -1,77 +1,128 @@
-buildscript {
-  ext {
-    asciidocBuildDir = "$buildDir/asciidoc"
-  }
-  repositories {
+plugins {
+    id "org.asciidoctor.jvm.convert" version "3.0.0-alpha.4"
+    id "org.asciidoctor.jvm.epub" version "3.0.0-alpha.4"
+    id "org.asciidoctor.jvm.pdf" version "3.0.0-alpha.4"
+    id "org.ajoberstar.git-publish" version "2.1.3"
+    id 'org.ajoberstar.grgit' version '4.0.1'
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'idea'
+}
+
+repositories {
     maven {
-      url "https://plugins.gradle.org/m2/"
+        url "https://plugins.gradle.org/m2/"
     }
     jcenter()
-  }
-  dependencies {
-    classpath 'org.asciidoctor:asciidoctorj-epub3:1.5.0-alpha.6'
-    classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
-    classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.4'
-    classpath "org.ajoberstar:gradle-git-publish:2.1.3"
-  }
 }
 
-plugins {
-  id 'org.asciidoctor.convert' version '1.5.3'
-  id "org.ajoberstar.git-publish" version "2.1.3"
-  id 'org.ajoberstar.grgit' version '4.0.0'
+ext {
+//    asciidoctorSourceSyncDir = file("${buildDir}/docs/sources")
+//    asciidoctorCombinedDocsDir = file("${buildDir}/docs/combined")
+    asciidocBuildDir = "$buildDir/asciidoc"
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'org.asciidoctor.convert'
+// buildscript {
+// ext {
+// asciidocBuildDir = "$buildDir/asciidoc"
+// }
+// repositories {
+// maven {
+// url "https://plugins.gradle.org/m2/"
+// }
+// jcenter()
+// }
+// dependencies {
+// classpath 'org.asciidoctor:asciidoctorj-epub3:1.5.0-alpha.6'
+// classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
+// classpath 'org.asciidoctor:asciidoctorj-diagram:1.5.4'
+// classpath "org.ajoberstar:gradle-git-publish:2.1.3"
+// }
+// }
+
+dependencies {
+    compile 'org.asciidoctor:asciidoctorj:2.2.0'
+    compile 'org.asciidoctor:asciidoctorj-diagram:2.0.0'
+}
+
+// plugins {
+//   id 'org.asciidoctor.convert' version '1.5.3'
+//   id "org.ajoberstar.git-publish" version "2.1.3"
+//   id 'org.ajoberstar.grgit' version '4.0.0'
+// }
+
+// apply plugin: 'java'
+// apply plugin: 'idea'
+// apply plugin: 'eclipse'
+apply plugin: 'org.asciidoctor.jvm.convert'
 apply plugin: "org.ajoberstar.git-publish"
 apply plugin: 'org.ajoberstar.grgit'
 
 asciidoctorj {
-  version = '1.5.5'
+    version = '2.2.0'
+//    options doctype: 'html5'
+//	attributes toclevel : 2
+//	// version = '1.5.5'
 }
 
+
 asciidoctor {
-  // backends 'dzslides'//'html5', 'pdf' //, 'epub3', 'docbook'
-  backends 'html5', 'pdf' //, 'epub3', 'docbook'
-  // enable the Asciidoctor Diagram extension
-  requires 'asciidoctor-diagram'
-  separateOutputDirs false
-  attributes  \
-         'build-gradle': file('build.gradle'),
-    'sourcedir': project.sourceSets.main.java.srcDirs[0],
-    //'pdf-stylesdir': 'theme',
-    //'pdf-style': 'mts',
-    'endpoint-url': 'http://example.org',
-    'source-highlighter': 'coderay',
-    'outdir': outputDir.absolutePath,
-    'buildDate': new java.text.SimpleDateFormat("dd-MMM-yyyy").format(new Date()),
-    'toc': 'left',
-    'icons': 'font',
-    'setanchors': '',
-    'idprefix': '',
-    'idseparator': '-',
-    'docinfo1': '',
-    'allow-uri-read': true
+
+//    baseDirIsRootProjectDir()
+    sourceDir file('docs/asciidoc')
+//	sources {
+//		include '01-seccion-00.adoc', '02-seccion-01.adoc', '03-seccion-02.adoc', '04-seccion-03.adoc'
+//	}
+    outputDir file('build/docs/asciidoc')
+
+// backends 'dzslides'//'html5', 'pdf' //, 'epub3', 'docbook'
+    // backends ['html5', 'pdf']//'html5', 'pdf' //, 'epub3', 'docbook'
+//	setBackends('html5')
+//    backends = ['pdf']
+
+    configuredOutputOptions.backends =  ['pdf']
+    baseDir 'src/docs/asciidoc'
+	sourceDir 'src/docs/asciidoc'
+//	configurations 'asciidocExtensions'
+
+	sources {
+		include 'index.adoc'
+	}
+
+    // // enable the Asciidoctor Diagram extension
+//	 requires=['asciidoctor-diagram']
+    // separateOutputDirs false
+    attributes 'build-gradle': file('build.gradle'),
+            'sourcedir': project.sourceSets.main.java.srcDirs[0],
+            'pdf-stylesdir': 'theme',
+            'pdf-style': 'mts',
+            'endpoint-url': 'http://example.org',
+            'source-highlighter': 'coderay',
+            'outdir': outputDir.absolutePath,
+            'fechaConstruccion': new java.text.SimpleDateFormat("dd-MMM-yyyy").format(new Date()),
+            'toc': 'left',
+            'icons': 'font',
+            'setanchors': '',
+            'idprefix': '',
+            'idseparator': '-',
+            'docinfo1': '',
+            'allow-uri-read': true
 }
 
 
 gitPublish {
-  println("*** Publish from -> $asciidocBuildDir")
-  repoUri = gitHubRepoUri 
-  branch = pagesBranch
+    println("*** Publish from -> $asciidocBuildDir")
+    repoUri = gitHubRepoUri
+    branch = pagesBranch
 
+    repoDir = file("$buildDir/docs")
 
-  repoDir = file("$buildDir/docs")
+    contents {
+        from "$asciidocBuildDir"
+        into "."
+    }
 
-  contents {
-    from "$asciidocBuildDir"
-    into "."
-  }
-
-  commitMessage = "Publish documentation for ${project.group}:${project.name}:$version"
+    commitMessage = "Publish documentation for ${project.group}:${project.name}:$version"
 }
 
 gitPublishPush.dependsOn asciidoctor

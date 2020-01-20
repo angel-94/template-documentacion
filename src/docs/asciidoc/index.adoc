@@ -1,20 +1,21 @@
 = Título Docs
 Subtítulo
-{buildDate}
+{fechaConstruccion}
 :toclevels: 4
-:toc-title: Índice
+:toc-title: Tabla de Contenido
 :revnumber: {project-version}
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../java]
 ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
 :title-logo-image: image:logo.png[]
 
-<<<
+
 include::01-seccion-00.adoc[]
-<<<
+
 include::02-seccion-01.adoc[]
-<<<
+
 include::03-seccion-02.adoc[]
-<<<
+
 include::04-seccion-03.adoc[]
+
 
