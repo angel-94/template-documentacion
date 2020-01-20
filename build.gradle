@@ -58,10 +58,9 @@ asciidoctor {
 
 
 gitPublish {
-    println("*** Publish from -> $asciidocBuildDir")
+    println("*** Publish from -> [$asciidocBuildDir]")
     repoUri = gitHubRepoUri
     branch = pagesBranch
-
 
     repoDir = file("$buildDir/docs")
 

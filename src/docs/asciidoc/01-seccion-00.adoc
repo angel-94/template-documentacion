@@ -8,4 +8,48 @@ ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
 
 Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.
 
+==== Subsección 0.1
+
+===== Diagramas
+
+[plantuml,secuencia-login,png]
+....
+title Login
+autonumber
+
+actor Anonimo
+control Api
+control Security
+entity Usuario
+database Neo4j
+
+Anonimo -> Api  : login username
+Api -> Usuario : findByUsername
+Usuario -> Neo4j : match n
+
+alt username registered
+
+Usuario --> Api: found
+Api -> Api: check password
+
+    alt successfull
+
+        Api -> Security: generate token
+        Security --> Api: token
+        Api --> Anonimo: token
+
+    else doesn't match
+
+        Api --> Anonimo: 403
+
+    end
+
+else username not registered
+
+Usuario --> Api: not found
+Api --> Anonimo: error 403
+
+end
+....
+
 
