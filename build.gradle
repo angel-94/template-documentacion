@@ -16,6 +16,9 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
+    maven {
+        url  "http://dl.bintray.com/puravida-software/repo"
+    }
     ruby {
         gems()
     }
@@ -30,6 +33,8 @@ def sourceDirectory = "src/docs/asciidoc"
 dependencies {
     compile 'org.asciidoctor:asciidoctorj:2.2.0'
     compile 'org.asciidoctor:asciidoctorj-diagram:2.0.0'
+//    asciidoctorGems 'rubygems:asciidoctor-revealjs:1.1.3'
+    compile "com.puravida.asciidoctor:asciidoctor-extensions:2.3.0"
 //    asciidoctorGems 'rubygems:pygments:1.2.1'
 }
 
@@ -63,21 +68,33 @@ pdfThemes {
 
 asciidoctorPdf {
 //    fontsDir = ''
-//    theme = 'corporate-theme.yml'
+//    theme = 'chronicles'
 //    dependsOn asciidoctorGemsPrepare
+//    inProcess OUT_OF_PROCESS
+    logDocuments true
+//    languages 'es'
     baseDirFollowsSourceDir()
     sourceDir file(sourceDirectory)
     outputDir file(buildDirectory)
     attributes 'build-gradle': file('build.gradle'),
             'endpoint-url': 'http://example.org',
             'source-highlighter': 'pretify',
-            'toc': 'left',
+            'toc': 'right',
+//            'toc': 'left',
+            'doctype': 'book',
+//            'doctype': 'manpage',
+            'organization': 'Meltsan Solutions',
             'icons': 'font',
             'setanchors': '',
             'idprefix': '',
             'idseparator': '-',
             'docinfo1': '',
             'allow-uri-read': true,
+            'experimental': '',
+            'reproducible': '',
+            'listing-caption': 'Listing',
+            'sectnums': '',
+            'toclevels': '4',
             'sourcedir': project.sourceSets.main.java.srcDirs[0],
             'outdir': outputDir.absolutePath,
             'buildDate': new SimpleDateFormat("dd-MMMM-yyyy HH:mm:ss").format(new Date()),
@@ -95,6 +112,7 @@ asciidoctor {
             'source-highlighter': 'pretify',
             'toc': 'left',
             'icons': 'font',
+			'doctype': 'book',
             'setanchors': '',
             'idprefix': '',
             'idseparator': '-',
@@ -124,4 +142,6 @@ gitPublish {
 
 gitPublishPush.dependsOn asciidoctor
 gitPublishPush.shouldRunAfter clean, asciidoctor, build
+task renderAll(dependsOn: [asciidoctor, asciidoctorPdf])
+
 

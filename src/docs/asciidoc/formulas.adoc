@@ -1,0 +1,48 @@
+include::common/common.adoc[]
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
+
+
+== Formulas
+
+=== Ejemplos de formulas básicas
+
+
+Cuando
+
+[stem]
+++++
+a \ne 0
+++++
+
+hay dos soluciones a
+
+[stem]
+++++
+ax^2 + bx + c = 0
+++++
+
+que son
+
+[stem]
+++++
+x = (-b +- sqrt(b^2-4ac))/(2a)
+++++
+
+Algunas tonterias sin mucho sentido (o sí?)
+
+[stem]
+++++
+sum_(i=1)^n i^3=((n(n+1))/2)^2
+++++
+
+[stem]
+++++
++-beta * omega = [[a,b],[c,d]]
+++++
+
+[stem]
+++++
+lim_(x->oo) = int_0^1 f(x)dx
+++++

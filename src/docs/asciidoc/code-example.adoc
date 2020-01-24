@@ -1,0 +1,26 @@
+include::common/common.adoc[]
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
+
+== Code Example Secction
+
+
+//include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[]
+//include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[lines=19..83]
+//include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[lines=19..-1]
+
+
+[source,java,linenums,options="nowrap"]
+//[source,java]
+[subs="verbatim,quotes"]
+----
+include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=hello,indent=0]
+
+
+include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=uno,indent=0]
+----
+<1> Una nota importante
+<2> Dos nota importante
+
+//<1> Nombre de la clase y su implementación

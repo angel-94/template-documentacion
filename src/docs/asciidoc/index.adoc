@@ -1,21 +1,29 @@
-= Título Docs
-Subtítulo hola mundo
-{buildDate}
-:toclevels: 4
-:toc-title: Tabla de Contenido
-:revnumber: {project-version}
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../java]
-ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
-:title-logo-image: image:logo.png[]
+= Title example: Subtitle
+Manuel Angel Ruiz Sumano
+{buildDate}
+:toc:
+:toclevels: 4
+:toc-collapsable:
+ifdef::backend-pdf[]
+:title-logo-image: image::logo.png[]
+endif::[]
+
+[abstract]
 
 <<<
 include::seccion-01.adoc[]
 <<<
 include::seccion-02.adoc[]
 <<<
+include::diagramas.adoc[]
+<<<
 include::seccion-03.adoc[]
 <<<
 include::seccion-04.adoc[]
-
+<<<
+include::code-example.adoc[]
+<<<
+//include::formulas.adoc[]
 
