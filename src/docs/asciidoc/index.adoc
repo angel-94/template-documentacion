@@ -1,12 +1,12 @@
 = Título Docs
-Subtítulo
+Subtítulo hola mundo
 {buildDate}
 :toclevels: 4
 :toc-title: Tabla de Contenido
 :revnumber: {project-version}
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../java]
-ifdef::backend-pdf[:imagesdir: images]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
 :title-logo-image: image:logo.png[]
 
 <<<

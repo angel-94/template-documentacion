@@ -1,11 +1,12 @@
 import java.text.SimpleDateFormat
 
 plugins {
-    id "org.asciidoctor.jvm.convert" version "3.0.0-alpha.4"
-    id "org.asciidoctor.jvm.epub" version "3.0.0-alpha.4"
-    id "org.asciidoctor.jvm.pdf" version "3.0.0-alpha.4"
+    id "org.asciidoctor.jvm.convert" version "3.0.0"
+    id "org.asciidoctor.jvm.epub" version "3.0.0"
+    id "org.asciidoctor.jvm.pdf" version "3.0.0"
     id "org.ajoberstar.git-publish" version "2.1.3"
     id 'org.ajoberstar.grgit' version '4.0.1'
+    id 'org.asciidoctor.jvm.gems' version '3.0.0'
     id 'java'
     id 'idea'
 }
@@ -15,13 +16,15 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
+    ruby {
+        gems()
+    }
     jcenter()
 }
 
 
-ext {
-    asciidocBuildDir = "$buildDir/asciidoc/html"
-}
+def buildDirectory = "$buildDir/asciidoc/docs"
+def sourceDirectory = "src/docs/asciidoc"
 
 
 dependencies {
@@ -42,7 +45,11 @@ asciidoctorj {
 }
 
 pdfThemes {
-    github 'custom-mts-theme', {
+//    local 'custom-mts-theme', {
+//        styleDir = file("themes/meltsan")
+//        styleName = 'mts-theme'
+//    }
+    github 'corporate-theme.yml', {
         organisation = 'fwilhe2'
         repository = 'corporate-theme'
         relativePath = 'resources/themes'
@@ -53,21 +60,14 @@ pdfThemes {
     }
 }
 
-//pdfThemes {
-//    local 'custom-mts-theme', {
-//        styleDir = file("themes/meltsan")
-//        styleName = 'mts-theme'
-//    }
-//}
-
 
 asciidoctorPdf {
 //    fontsDir = ''
-//    theme = 'custom-mts-theme'
+//    theme = 'corporate-theme.yml'
 //    dependsOn asciidoctorGemsPrepare
     baseDirFollowsSourceDir()
-    sourceDir file("src/docs/asciidoc")
-    outputDir file("$buildDir/asciidoc/pdf")
+    sourceDir file(sourceDirectory)
+    outputDir file(buildDirectory)
     attributes 'build-gradle': file('build.gradle'),
             'endpoint-url': 'http://example.org',
             'source-highlighter': 'pretify',
@@ -87,8 +87,8 @@ asciidoctorPdf {
 
 asciidoctor {
     baseDirFollowsSourceDir()
-    sourceDir file("src/docs/asciidoc")
-    outputDir file("$buildDir/asciidoc/html")
+    sourceDir file(sourceDirectory)
+    outputDir file(buildDirectory)
 
     attributes 'build-gradle': file('build.gradle'),
             'endpoint-url': 'http://example.org',
@@ -108,14 +108,14 @@ asciidoctor {
 
 
 gitPublish {
-    println("*** Publish from -> $asciidocBuildDir")
+    println("*** Publish from -> $buildDirectory")
     repoUri = gitHubRepoUri
     branch = pagesBranch
 
     repoDir = file("$buildDir/docs")
 
     contents {
-        from "$asciidocBuildDir"
+        from "$buildDirectory"
         into "."
     }
 
