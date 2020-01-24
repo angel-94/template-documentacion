@@ -1,0 +1,51 @@
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../java]
+ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
+
+== Ejemplos de diagramas
+
+=== Diagras UML y Otros
+
+hola mundo asdas d
+
+[ditaa]
+....
+                   +-------------+
+                   | Asciidoctor |-------+
+                   |   diagram   |       |
+                   +-------------+       | PNG out
+                       ^                 |
+                       | ditaa in        |
+                       |                 v
+ +--------+   +--------+----+    /---------------\
+ |        |---+ Asciidoctor +--->|           c8BF|
+ |  Text  |   +-------------+    |   Beautiful   |
+ |Document|   |   !magic!   |    |    Output     |
+ |     {d}|   |             |    |               |
+ +---+----+   +-------------+    \---------------/
+     :                                   ^
+     |          Lots of work             |
+     +-----------------------------------+
+....
+
+[plantuml,casos-de-uso-crud,png]
+....
+left to right direction
+skinparam packageStyle rect
+title Productos y lugares
+
+actor Usuario as usuario
+
+rectangle red{
+    usuario -- (lugares)
+    (lugares) <.. (alta lugar) : extend
+    (lugares) <.. (modificacion lugar) : extend
+    (lugares) <.. (ver lugar) : extend
+
+    (productos) ...> (ver lugar)
+    usuario -- (productos)
+    (productos) <.. (alta producto) : extend
+    (productos) <.. (modificacion producto) : extend
+}
+
+....
