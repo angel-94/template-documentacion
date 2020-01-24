@@ -19,7 +19,7 @@ hola mundo asdas d
                        | ditaa in        |
                        |                 v
  +--------+   +--------+----+    /---------------\
- |        |---+ Asciidoctor +--->|               |
+ |        |---+ Asciidoctor +--->|           c8BF|
  |  Text  |   +-------------+    |   Beautiful   |
  |Document|   |   !magic!   |    |    Output     |
  |     {d}|   |             |    |               |

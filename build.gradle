@@ -16,13 +16,11 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
-    maven {
-        url  "http://dl.bintray.com/puravida-software/repo"
-    }
-    ruby {
-        gems()
-    }
+//    maven {
+//        url  "http://dl.bintray.com/puravida-software/repo"
+//    }
     jcenter()
+    ruby.gems()
 }
 
 
@@ -33,9 +31,9 @@ def sourceDirectory = "src/docs/asciidoc"
 dependencies {
     compile 'org.asciidoctor:asciidoctorj:2.2.0'
     compile 'org.asciidoctor:asciidoctorj-diagram:2.0.0'
+    asciidoctorGems 'rubygems:pygments:1.2.1'
 //    asciidoctorGems 'rubygems:asciidoctor-revealjs:1.1.3'
-    compile "com.puravida.asciidoctor:asciidoctor-extensions:2.3.0"
-//    asciidoctorGems 'rubygems:pygments:1.2.1'
+//    compile "com.puravida.asciidoctor:asciidoctor-extensions:2.3.0"
 }
 
 apply plugin: 'org.asciidoctor.jvm.convert'
@@ -73,25 +71,33 @@ asciidoctorPdf {
 //    inProcess OUT_OF_PROCESS
     logDocuments true
 //    languages 'es'
+//    dependsOn asciidoctorGemsPrepare
     baseDirFollowsSourceDir()
     sourceDir file(sourceDirectory)
     outputDir file(buildDirectory)
+
+    asciidoctorj {
+//        requires 'pygments'
+        attributes 'source-highlighter' : 'rouge'
+    }
+
     attributes 'build-gradle': file('build.gradle'),
             'endpoint-url': 'http://example.org',
-            'source-highlighter': 'pretify',
+//            'source-highlighter': 'pretify',
+            'source-highlighter': 'rouge',
             'toc': 'right',
 //            'toc': 'left',
             'doctype': 'book',
 //            'doctype': 'manpage',
-            'organization': 'Meltsan Solutions',
+//            'organization': 'Meltsan Solutions',
             'icons': 'font',
             'setanchors': '',
             'idprefix': '',
             'idseparator': '-',
             'docinfo1': '',
             'allow-uri-read': true,
-            'experimental': '',
-            'reproducible': '',
+//            'experimental': '',
+//            'reproducible': '',
             'listing-caption': 'Listing',
             'sectnums': '',
             'toclevels': '4',
@@ -101,15 +107,26 @@ asciidoctorPdf {
             'project-version': "$version"
 }
 
+// asciidoctorj { 
+//     // options doctype: 'book', ruby: 'erubis'
+//     attributes 'source-highlighter': 'pretify'
+// }
+
 
 asciidoctor {
     baseDirFollowsSourceDir()
     sourceDir file(sourceDirectory)
     outputDir file(buildDirectory)
+    logDocuments true
+
+    asciidoctorj {
+//        requires 'pygments'
+        attributes 'source-highlighter' : 'rouge'
+    }
 
     attributes 'build-gradle': file('build.gradle'),
             'endpoint-url': 'http://example.org',
-            'source-highlighter': 'pretify',
+            'source-highlighter': 'rouge',
             'toc': 'left',
             'icons': 'font',
 			'doctype': 'book',
