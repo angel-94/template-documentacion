@@ -40,6 +40,7 @@ public class QueueProducerServiceImpl implements QueueProducerService {
     private QueueConfig queueConfig;
 
 
+    // tag::codigo1[]
     /**
      * Comnetarios sobre el metodo
      * @param message el mensaje
@@ -48,14 +49,14 @@ public class QueueProducerServiceImpl implements QueueProducerService {
     public void queueExample(String message) throws QueueException {
         try {
             Channel channel = queueConfig.createChannel();
-            channel.exchangeDeclare(AML_EXCHANGE_NAME, AML_EXCHANGE_TYPE);
+            channel.exchangeDeclare(AML_EXCHANGE_NAME, AML_EXCHANGE_TYPE); // <1>
             for (int i = 0; i < 10; i++) {
                 String routingKey = i % 2 == 0 ? AML_SEND_MAIL : AML_CASE_ASSIGNMENT;
                 channel.basicPublish(
                         AML_EXCHANGE_NAME,
                         routingKey,
                         null,
-                        message.getBytes(StandardCharsets.UTF_8));
+                        message.getBytes(StandardCharsets.UTF_8)); // <2> 
                 log.info("[x] Send message -> " + message);
             }
             channel.close();
@@ -63,6 +64,9 @@ public class QueueProducerServiceImpl implements QueueProducerService {
             log.error("Error en el envio de mensajes -> " + e.getMessage());
         }
     }
+    // end::codigo1[]
+
+
 
     /**
      * Comentarios
@@ -97,6 +101,29 @@ public class QueueProducerServiceImpl implements QueueProducerService {
         System.out.println("Hola mundo"); //<2>
     }
     // end::hello[]
+
+
+    /**
+     * Comentarios
+     * */
+    public void holaMundo() { //<1>
+        System.out.println("Hola mundo"); //<2>
+    }
+
+
+    /**
+     * Comentarios
+     * */
+    public void holaMundo() { //<1>
+        System.out.println("Hola mundo"); //<2>
+    }
+
+    /**
+     * Comentarios
+     * */
+    public void holaMundo() { //<1>
+        System.out.println("Hola mundo"); //<2>
+    }
 
 
 }

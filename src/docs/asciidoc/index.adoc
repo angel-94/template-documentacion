@@ -24,6 +24,6 @@ include::seccion-03.adoc[]
 include::seccion-04.adoc[]
 <<<
 include::code-example.adoc[]
-<<<
+// <<<
 //include::formulas.adoc[]
 

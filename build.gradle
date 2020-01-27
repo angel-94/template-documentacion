@@ -134,6 +134,7 @@ asciidoctor {
             'idprefix': '',
             'idseparator': '-',
             'docinfo1': '',
+            'numbered': '',
             'allow-uri-read': true,
             'sourcedir': project.sourceSets.main.java.srcDirs[0],
             'outdir': outputDir.absolutePath,
@@ -143,10 +144,12 @@ asciidoctor {
 
 
 gitPublish {
-    println("*** Publish from -> $buildDirectory")
+    println("*** Publish from -> $$buildDir/docs")
     repoUri = gitHubRepoUri
     branch = pagesBranch
 
+// def buildDirectory = "$buildDir/asciidoc/docs"
+// def sourceDirectory = "src/docs/asciidoc"
     repoDir = file("$buildDir/docs")
 
     contents {
@@ -158,7 +161,7 @@ gitPublish {
 }
 
 gitPublishPush.dependsOn asciidoctor
-gitPublishPush.shouldRunAfter clean, asciidoctor, build
+// gitPublishPush.shouldRunAfter clean, asciidoctor, build
 task renderAll(dependsOn: [asciidoctor, asciidoctorPdf])
 
 

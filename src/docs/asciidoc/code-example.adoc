@@ -11,16 +11,34 @@ ifdef::backend-pdf[:imagesdir: {outdir}/{imagesdir}]
 //include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[lines=19..-1]
 
 
+// [source,java,linenums,options="nowrap"]
+// //[source,java]
+// [subs="verbatim,quotes"]
+// ----
+// include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=hello,indent=0]
+
+
+// include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=uno,indent=0]
+// ----
+// <1> Una nota importante
+// <2> Dos nota importante
+
+//<1> Nombre de la clase y su implementación
+
+
+TIP: El mensaje
+
+NOTE: Otro mensaje
+
+WARNING: Mensaje de alerta
+
+
 [source,java,linenums,options="nowrap"]
 //[source,java]
 [subs="verbatim,quotes"]
 ----
-include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=hello,indent=0]
-
-
-include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=uno,indent=0]
+include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=codigo1,indent=0]
 ----
-<1> Una nota importante
-<2> Dos nota importante
+<1> Declaración de la cola TODO
+<2> Mnsajes como bytes
 
-//<1> Nombre de la clase y su implementación
