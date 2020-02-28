@@ -34,7 +34,6 @@ WARNING: Mensaje de alerta
 
 
 [source,java,linenums,options="nowrap"]
-//[source,java]
 [subs="verbatim,quotes"]
 ----
 include::{sourcedir}/com/mts/demo/QueueProducerServiceImpl.java[tags=codigo1,indent=0]
